@@ -9,9 +9,9 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-type Props = {};
+type SignupProps = {};
 
-const Signup: React.FC<Props> = (props: Props) => {
+const Signup: React.FC<SignupProps> = (props: SignupProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
