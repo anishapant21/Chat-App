@@ -2,21 +2,21 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
+const userRoutes = require("./routes/userRoutes");
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 const app = express();
 dotenv.config();
 connectDB();
+// accept json from frontend
 app.use(express.json());
+
 app.use(cors({ origin: true }));
 
-app.post("/authenticate", async (req, res) => {
-  const { username } = req.body;
-  return res.json({ username: username, secret: "sha256..." });
-});
+app.use("/api/user", userRoutes);
 
-app.get("/api/chats", async (req, res) => {
-  return res.send("Hello");
-});
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5005;
 app.listen(PORT);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Button,
   FormControl,
@@ -9,12 +9,13 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-type Props = {};
+type LoginProps = {};
 
-const Login = (props: Props) => {
+const Login: React.FC<LoginProps> = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [show, setShow] = useState<boolean>(false);
+
   return (
     <VStack spacing="5px">
       <FormControl id="email" isRequired>
