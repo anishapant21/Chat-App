@@ -6,8 +6,11 @@ import {
   InputGroup,
   InputRightElement,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type SignupProps = {};
 
@@ -18,11 +21,112 @@ const Signup: React.FC<SignupProps> = (props: SignupProps) => {
   const [pic, setPic] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [show, setShow] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
+  const navigate = useNavigate();
 
   const postDetails = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let pics;
+    setLoading(true);
     if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      console.log(file);
+      pics = e.target.files[0];
+      if (pic === undefined) {
+        toast({
+          title: "Please select an image",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+        return;
+      }
+
+      if (pics.type == "image/jpeg" || pics.type === "image/png") {
+        const data = new FormData();
+        data.append("file", pics);
+        data.append("upload-preset", "chat-app");
+        data.append("cloud_name", "divnhcts4");
+        fetch(
+          "https://cloudinary://951383311571224:<your_api_secret>@divnhcts4",
+          {
+            method: "post",
+            body: data,
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setPic(data.url.toString());
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            setLoading(false);
+          });
+      }
+    }
+  };
+
+  const submitHandler = async () => {
+    setLoading(true);
+    if (!name || !email || !password || !confirmPassword) {
+      toast({
+        title: "Please Fill all the Feilds",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
+    }
+    if (password !== confirmPassword) {
+      toast({
+        title: "Passwords Do Not Match",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
+    }
+    console.log(name, email, password, pic);
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        "/api/user",
+        {
+          name,
+          email,
+          password,
+          pic,
+        },
+        config
+      );
+      console.log(data);
+      toast({
+        title: "Registration Successful",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setLoading(false);
+      navigate("/chats");
+    } catch (error) {
+      toast({
+        title: "Error Occured!",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
     }
   };
 
@@ -81,8 +185,8 @@ const Signup: React.FC<SignupProps> = (props: SignupProps) => {
         colorScheme="blue"
         width="100%"
         style={{ marginTop: 15 }}
-        // onClick={submitHandler}
-        // isLoading={picLoading}
+        onClick={submitHandler}
+        isLoading={loading}
       >
         Sign Up
       </Button>
