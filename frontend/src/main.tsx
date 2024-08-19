@@ -4,12 +4,15 @@ import App from "./App.tsx";
 import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
+import ChatProvider from "./context/ChatProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <ChakraProvider>
-        <App />
+        <ChatProvider>
+          <App />
+        </ChatProvider>
       </ChakraProvider>
     </BrowserRouter>
   </StrictMode>
