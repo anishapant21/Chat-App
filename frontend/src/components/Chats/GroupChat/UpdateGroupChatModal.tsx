@@ -149,6 +149,7 @@ const UpdateGroupChatModal: React.FC<UpdateGroupChatModalProps> = ({
 
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);
+      fetchMessages();
       setLoading(false);
     } catch (error: any) {
       toast({

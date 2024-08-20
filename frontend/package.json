@@ -19,7 +19,8 @@
     "framer-motion": "^11.3.24",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0"
+    "react-router-dom": "^6.26.0",
+    "react-scrollable-feed": "^2.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
