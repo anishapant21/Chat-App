@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Input } from "@chakra-ui/input";
@@ -19,12 +22,11 @@ import {
 import { Tooltip } from "@chakra-ui/tooltip";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/avatar";
-import { useState } from "react";
-import axios from "axios";
 import { useToast } from "@chakra-ui/toast";
 import { Spinner } from "@chakra-ui/spinner";
+
 import { useChatState } from "../../context/ChatProvider";
-import { useNavigate } from "react-router-dom";
+
 import ProfileModal from "../Profile/ProfileModal.tsx/ProfileModal";
 import ChatLoading from "../Chats/ChatLoading";
 import UserListItem from "../UserAvatar/UserListItem";

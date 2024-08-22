@@ -1,16 +1,14 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Button } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { Box, Stack, Text } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
-import axios from "axios";
-import { useEffect, useState } from "react";
-// import { getSender } from "../config/ChatLogics";
+
 import ChatLoading from "./ChatLoading";
-// import GroupChatModal from "./miscellaneous/GroupChatModal";
-import { Button } from "@chakra-ui/react";
 import { useChatState } from "../../context/ChatProvider";
 import { getSender } from "../../utils/chatHelper";
 import GroupChatModal from "./GroupChat/GroupChatModal";
-// import { ChatState } from "../Context/ChatProvider";
 
 interface MyChatsProps {
   fetchAgain: boolean;

@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Button,
   FormControl,
@@ -8,13 +11,8 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-type SignupProps = {};
-
-const Signup: React.FC<SignupProps> = (props: SignupProps) => {
+const Signup = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -90,7 +88,6 @@ const Signup: React.FC<SignupProps> = (props: SignupProps) => {
       setLoading(false);
       return;
     }
-    console.log(name, email, password, pic);
     try {
       const config = {
         headers: {
@@ -107,7 +104,6 @@ const Signup: React.FC<SignupProps> = (props: SignupProps) => {
         },
         config
       );
-      console.log(data);
       toast({
         title: "Registration Successful",
         status: "success",

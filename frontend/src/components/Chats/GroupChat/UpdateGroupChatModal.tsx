@@ -1,3 +1,5 @@
+import { useState } from "react";
+import axios from "axios";
 import { ViewIcon } from "@chakra-ui/icons";
 import {
   Modal,
@@ -16,11 +18,11 @@ import {
   IconButton,
   Spinner,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useState } from "react";
-import { useChatState } from "../../../context/ChatProvider";
+
 import UserListItem from "../../UserAvatar/UserListItem";
 import UserBadgeItem from "../../UserAvatar/UserBadgeItem";
+
+import { useChatState } from "../../../context/ChatProvider";
 
 interface UpdateGroupChatModalProps {
   fetchMessages: () => void;

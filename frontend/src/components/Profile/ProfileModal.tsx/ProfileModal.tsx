@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { ViewIcon } from "@chakra-ui/icons";
 import {
   Modal,
@@ -13,7 +14,6 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
-import { ReactNode } from "react";
 
 interface User {
   name: string;

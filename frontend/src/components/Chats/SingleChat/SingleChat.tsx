@@ -1,5 +1,6 @@
 import React, { useState, KeyboardEvent, useEffect } from "react";
-import { useChatState } from "../../../context/ChatProvider";
+import axios from "axios";
+import Lottie from "react-lottie";
 import {
   Box,
   FormControl,
@@ -10,14 +11,14 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { getSenderFull } from "../../../utils/chatHelper";
-import UpdateGroupChatModal from "../GroupChat/UpdateGroupChatModal";
-import axios from "axios";
-import ScrollableChat from "../ScrollableChat";
 import { Socket, io } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import Lottie from "react-lottie";
+
+import { getSenderFull } from "../../../utils/chatHelper";
+import UpdateGroupChatModal from "../GroupChat/UpdateGroupChatModal";
 import animationData from "../../../assets/animations/typing.json";
+import ScrollableChat from "../ScrollableChat";
+import { useChatState } from "../../../context/ChatProvider";
 
 const defaultOptions = {
   loop: true,
@@ -83,7 +84,6 @@ const SingleChat: React.FC<Props> = ({ fetchAgain, setFetchAgain }) => {
         !selectedChat ||
         selectedChatCompare._id !== newMessageReceived.chat._id
       ) {
-        // give notification
         if (!notification.includes(newMessageReceived)) {
           setNotification([newMessageReceived, ...notification]);
           setFetchAgain(!fetchAgain);

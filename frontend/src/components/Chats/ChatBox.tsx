@@ -1,8 +1,7 @@
 import { Box } from "@chakra-ui/layout";
-// import "./styles.css";
+
 import { useChatState } from "../../context/ChatProvider";
 import SingleChat from "./SingleChat/SingleChat";
-// import SingleChat from "./SingleChat";
 
 interface ChatboxProps {
   fetchAgain: boolean;
