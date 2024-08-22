@@ -22,12 +22,13 @@ app.use("/api/message", messageRoutes);
 
 // --------------------- DEPLOYMENT --------------------
 const __dirname1 = path.resolve();
+const deploy = "production";
 
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+if (process.env.NODE_ENV == "production" || deploy == "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/dist")));
 
   app.get("*", (req, res) => {
-    res.sendFile();
+    res.sendFile(path.resolve(__dirname1, "frontend", "dist", "index.html"));
   });
 } else {
   app.get("/", (req, res) => {
