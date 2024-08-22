@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useChatState } from "../context/ChatProvider";
 import { Box } from "@chakra-ui/react";
+
 import Sidebar from "../components/SideBar/Sidebar";
 import MyChat from "../components/Chats/MyChat";
 import ChatBox from "../components/Chats/ChatBox";
 
-type Props = {};
+import { useChatState } from "../context/ChatProvider";
 
-const ChatPage = (props: Props) => {
+const ChatPage = () => {
   const { user } = useChatState();
   const [fetchAgain, setFetchAgain] = useState(false);
 

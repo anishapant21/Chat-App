@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Container,
@@ -8,14 +10,11 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+
 import Login from "../components/Authentication/Login";
 import Signup from "../components/Authentication/Signup";
-import { useNavigate } from "react-router-dom";
 
-type HomePageProps = {};
-
-const HomePage = (props: HomePageProps) => {
+const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +26,6 @@ const HomePage = (props: HomePageProps) => {
   return (
     <Container maxW="xl" centerContent>
       <Box
-        // d="flex"
         justifyContent="center"
         p={3}
         bg="white"
