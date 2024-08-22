@@ -19,25 +19,17 @@ import {
 import { Tooltip } from "@chakra-ui/tooltip";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/avatar";
-// import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/toast";
-// import ChatLoading from "../ChatLoading";
 import { Spinner } from "@chakra-ui/spinner";
 import { useChatState } from "../../context/ChatProvider";
 import { useNavigate } from "react-router-dom";
 import ProfileModal from "../Profile/ProfileModal.tsx/ProfileModal";
 import ChatLoading from "../Chats/ChatLoading";
 import UserListItem from "../UserAvatar/UserListItem";
-// import ProfileModal from "./ProfileModal";
-// import NotificationBadge from "react-notification-badge";
-// import { Effect } from "react-notification-badge";
-// import { getSender } from "../../config/ChatLogics";
-// import UserListItem from "../userAvatar/UserListItem";
-// import { ChatState } from "../../Context/ChatProvider";
+import { getSender } from "../../utils/chatHelper";
 
-// Define types for the component's state
 interface User {
   _id: string;
   name: string;
@@ -51,11 +43,6 @@ interface Chat {
   chatName: string;
   isGroupChat: boolean;
   users: User[];
-}
-
-interface Notification {
-  _id: string;
-  chat: Chat;
 }
 
 const SideDrawer: React.FC = () => {
@@ -174,10 +161,7 @@ const SideDrawer: React.FC = () => {
         <div>
           <Menu>
             <MenuButton p={1}>
-              {/* <NotificationBadge
-                count={notification.length}
-                effect={Effect.SCALE}
-              /> */}
+              {notification.length}
               <BellIcon fontSize="2xl" m={1} />
             </MenuButton>
             <MenuList pl={2}>
@@ -190,12 +174,12 @@ const SideDrawer: React.FC = () => {
                     setNotification(notification.filter((n) => n !== notif));
                   }}
                 >
-                  {/* {notif.chat.isGroupChat
+                  {notif.chat.isGroupChat
                     ? `New Message in ${notif.chat.chatName}`
                     : `New Message from ${getSender(
                         user as User,
                         notif.chat.users
-                      )}`} */}
+                      )}`}
                 </MenuItem>
               ))}
             </MenuList>
