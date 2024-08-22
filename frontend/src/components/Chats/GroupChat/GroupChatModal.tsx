@@ -18,9 +18,6 @@ import { useState } from "react";
 import { useChatState } from "../../../context/ChatProvider";
 import UserListItem from "../../UserAvatar/UserListItem";
 import UserBadgeItem from "../../UserAvatar/UserBadgeItem";
-// import { ChatState } from "../../Context/ChatProvider";
-// import UserBadgeItem from "../userAvatar/UserBadgeItem";
-// import UserListItem from "../userAvatar/UserListItem";
 
 interface User {
   _id: string;
@@ -37,7 +34,6 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [groupChatName, setGroupChatName] = useState<string>("");
   const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
-  const [search, setSearch] = useState<string>("");
   const [searchResult, setSearchResult] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const toast = useToast();
@@ -60,7 +56,6 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ children }) => {
   };
 
   const handleSearch = async (query: string) => {
-    setSearch(query);
     if (!query) {
       return;
     }
